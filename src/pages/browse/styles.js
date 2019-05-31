@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { Spinner } from "../../components/Loading/styles";
+
 export const Container = styled.div`
   flex: 1;
   margin-top: 110px;
@@ -14,6 +16,11 @@ export const Title = styled.h1`
 export const List = styled.div`
   margin-top: 20px;
   display: flex;
+
+  ${Spinner} {
+    height: 24px;
+    margin-left: 5px;
+  }
 `;
 
 export const Playlist = styled(Link)`

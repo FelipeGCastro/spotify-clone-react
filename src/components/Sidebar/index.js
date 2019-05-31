@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -7,9 +8,24 @@ import { Creators as PlaylistsActions } from "../../store/ducks/playlists";
 
 import { Container, NewPlaylist, Nav } from "./styles";
 
+import Loading from "../../components/Loading";
+
 import AddPlaylistIcon from "../../Assets/images/add_playlist.svg";
 
 class Sidebar extends Component {
+  static propTypes = {
+    getPlaylistsRequest: PropTypes.func.isRequired,
+    playlists: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          title: PropTypes.string
+        })
+      ),
+      loading: PropTypes.bool
+    }).isRequired
+  };
+
   componentDidMount() {
     this.props.getPlaylistsRequest();
   }
@@ -19,7 +35,7 @@ class Sidebar extends Component {
         <div>
           <Nav main>
             <li>
-              <a href="">Navegar</a>
+              <Link to="/">Navegar</Link>
             </li>
             <li>
               <a href="">Radio</a>
@@ -59,16 +75,14 @@ class Sidebar extends Component {
           </Nav>
           <Nav>
             <li>
-              <span>PLAYLISTs</span>
+              <span>PLAYLISTS</span>
+              {this.props.playlists.loading && <Loading />}
             </li>
-            {/* {this.props.playlists.data.map(playlist => (
+            {this.props.playlists.data.map(playlist => (
               <li key={playlist.id}>
-                <link to={`playlists/${playlist.id}`}>{playlist.title}</link>
+                <Link to={`/playlists/${playlist.id}`}>{playlist.title}</Link>
               </li>
-            ))} */}
-            <li>
-              <a href="">Outra coisa</a>
-            </li>
+            ))}
           </Nav>
         </div>
         <NewPlaylist>
