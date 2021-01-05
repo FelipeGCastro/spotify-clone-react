@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@redux-saga/is": "^1.0.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "eslint": "^5.16.0",
     "prop-types": "^15.7.2",
     "rc-slider": "^8.6.11",
